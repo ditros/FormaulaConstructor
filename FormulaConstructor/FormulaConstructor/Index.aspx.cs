@@ -23,8 +23,7 @@ namespace FormulaConstructor
         {
             ClientScript.RegisterStartupScript(Page.GetType(), "ExitScript",
                 "<script language=javascript>" +
-                "function exit() {var exit = confirm(\"Хотите закрыть страницу?\");" +
-                "if (exit) {window.close();} else {return false;}}</script>");
+                "function exit() {window.close();}</script>");
 
             ClientScript.RegisterStartupScript(Page.GetType(), "OnChangeScript",
                 "<script language=javascript>" +
