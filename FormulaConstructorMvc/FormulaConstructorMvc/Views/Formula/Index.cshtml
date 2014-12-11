@@ -12,9 +12,9 @@
 <br />
 <br />
 
-@Html.DropDownList("IndependentVariables", Model.IndependentVariables, new { onchange = "OnChange(this)"})
-@Html.DropDownList("Responses", Model.Responses, new { onchange = "OnChange(this)"})
-@Html.DropDownList("MathFunctions", Model.MathFunctions, new { onchange = "OnChange(this)"})
+@Html.DropDownList("IndependentVariables", Model.IndependentVariables, new { onchange = "OnChange(this)", onmousedown = "this.value='';"})
+@Html.DropDownList("Responses", Model.Responses, new { onchange = "OnChange(this)", onmousedown = "this.value='';"})
+@Html.DropDownList("MathFunctions", Model.MathFunctions, new { onchange = "OnChange(this)", onmousedown = "this.value='';"})
 
 <br />
 <br />
@@ -23,7 +23,6 @@
 <input type ="button" value="OK" name="ok" id="ok" style="margin-left: 100px;" onclick="exit()" />
 <input type ="button" value="Cancel" name="cancel" id="cancel" onclick="exit()" />
 
-<script src="Scripts/jquery-1.8.2.min.js"> </script>
 <script>
     function exit() {
         var exit = confirm("Хотите закрыть страницу?");
@@ -37,6 +36,7 @@
         var myindex = dropdown.selectedIndex;
         var SelectedValue = dropdown.options[myindex].value;
         insertAtCursor(SelectedValue);
+        
 
         return true;
     }
