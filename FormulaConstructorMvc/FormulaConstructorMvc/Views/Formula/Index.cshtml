@@ -1,0 +1,68 @@
+﻿@model FormulaConstructorMvc.Models.IndexViewModel
+
+@{
+    ViewBag.Title = "Formula Constructor - Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Formula Constructor</h2>
+
+@Html.TextArea("Formula", new { style = "width: 233px;" })
+
+<br />
+<br />
+
+@Html.DropDownList("IndependentVariables", Model.IndependentVariables, new { onchange = "OnChange(this)"})
+@Html.DropDownList("Responses", Model.Responses, new { onchange = "OnChange(this)"})
+@Html.DropDownList("MathFunctions", Model.MathFunctions, new { onchange = "OnChange(this)"})
+
+<br />
+<br />
+
+<input type ="button" value="help" name="help" id="help"/>
+<input type ="button" value="OK" name="ok" id="ok" style="margin-left: 100px;" onclick="exit()" />
+<input type ="button" value="Cancel" name="cancel" id="cancel" onclick="exit()" />
+
+<script src="Scripts/jquery-1.8.2.min.js"> </script>
+<script>
+    function exit() {
+        var exit = confirm("Хотите закрыть страницу?");
+        if (exit) {
+            window.close();
+        }
+    }
+
+    function OnChange(dropdown)
+    {
+        var myindex = dropdown.selectedIndex;
+        var SelectedValue = dropdown.options[myindex].value;
+        insertAtCursor(SelectedValue);
+
+        return true;
+    }
+
+    function insertAtCursor(text) {
+        var field = document.getElementById("Formula");
+
+        if (document.selection) {
+            var range = document.selection.createRange();
+
+            if (!range || range.parentElement() != field) {
+                field.focus();
+                range = field.createTextRange();
+                range.collapse(false);
+            }
+            range.text = text;
+            range.collapse(false);
+            range.select();
+        } else {
+            field.focus();
+            var val = field.value;
+            var selStart = field.selectionStart;
+            var caretPos = selStart + text.length;
+            field.value = val.slice(0, selStart) + text + val.slice(field.selectionEnd);
+            field.setSelectionRange(caretPos, caretPos);
+        }
+    }
+
+</script>
